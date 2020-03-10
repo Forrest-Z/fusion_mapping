@@ -14,9 +14,47 @@ find_package(catkin REQUIRED COMPONENTS
         tf
         eigen_conversions
         )
-include_directories(${catkin_INCLUDE_DIRS})
+
+FIND_LIBRARY(YAML_CPP_LIBRARIES yaml-cpp)
+if (NOT YAML_CPP_LIBRARIES)
+    FIND_PACKAGE(yaml-cpp REQUIRED)
+    INCLUDE_DIRECTORIES(${YAML_CPP_INCLUDE_DIRS})
+endif (NOT YAML_CPP_LIBRARIES)
+
+find_package(gflags REQUIRED)
+
+find_package(OpenGL REQUIRED)
+find_package(Boost REQUIRED filesystem program_options)
+
+find_package(Ceres REQUIRED)
+include_directories(${CERES_INCLUDE_DIRS})
+
+find_package(PCL 1.7 REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARIY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+find_package(Eigen3 3.3.1 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
+
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+catkin_package(
+        INCLUDE_DIRS include
+        LIBRARIES fusion_mapping
+        CATKIN_DEPENDS roscpp nodelet velodyne_pointcloud
+
+)
+
+include_directories(
+        3rdparty
+        ${Boost_INCLUDE_DIRS}
+        ${catkin_INCLUDE_DIRS}
+        ${GFLAGS_INCLUDE_DIRS}
+)
 include(cmake/global_defination.cmake)
-catkin_package()
 
 
 # <构建类型>

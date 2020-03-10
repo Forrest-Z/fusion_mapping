@@ -29,10 +29,15 @@ target_include_directories(${target_name}
     $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
   )
 
-#target_link_libraries(${target_name}
-#  PUBLIC
-#    <Add your libs>
-#  )
+target_link_libraries(${target_name}
+  PUBLIC
+   # <Add your libs>
+        ${PCL_LIBRARIES}
+        ${CERES_LIBRARIES}
+        ${GFLAGS_LIBRARIES}
+        ${YAML_CPP_LIBRARIES}
+        ${OpenCV_LIBS}
+  )
 
 set_target_properties(${target_name}
   PROPERTIES
