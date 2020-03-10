@@ -1,0 +1,11 @@
+# Lib           fusion_mapping::core
+# Version       1.0.0
+# Variable      fusion_mapping::core
+# Intro         a cmake sample project
+
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/FusionMappingTargets.cmake")
+check_required_components(
+  "core"
+  )
