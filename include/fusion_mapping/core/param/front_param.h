@@ -13,6 +13,8 @@
 
 namespace FM{
 const std::string lidar_config_file = WORK_SPACE_PATH+std::string("/config/front_end/lidar_config.yaml");
+const std::string imu_config_file = WORK_SPACE_PATH+std::string("/config/front_end/imu_config.yaml");
+const std::string gnss_config_file = WORK_SPACE_PATH+std::string("/config/front_end/gnss_config.yaml");
 struct LidarConfig{
   std::string topic_name;
   uint16_t ring_number;
@@ -26,9 +28,21 @@ struct LidarConfig{
   double num_lpr; // 选取的lpr个数
 };
 
+struct IMUConfig{
+  std::string topic_name;
+};
+
+struct GNSSConfig{
+  std::string topic_name;
+};
+
 struct FrontParam{
   static LidarConfig lidar_config_;
+  static IMUConfig imu_config_;
+  static GNSSConfig gnss_config_;
   static bool LoadLidarConfig();
+  static bool LoadIMUConfig();
+  static bool LoadGNSSConfig();
  private:
   static std::shared_ptr<FM::FrontParam> front_param_;
 

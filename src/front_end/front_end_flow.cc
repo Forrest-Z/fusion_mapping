@@ -7,9 +7,12 @@
 namespace FM {
 FrontEndFlow::FrontEndFlow(ros::NodeHandle& nh) {
   FrontParam::LoadLidarConfig();
+  FrontParam::LoadGNSSConfig();
+  FrontParam::LoadIMUConfig();
+
   cloud_sub_ptr_ = std::make_shared<CloudSubscriber>(nh,FrontParam::lidar_config_.topic_name, 100000);
-  imu_sub_ptr_ = std::make_shared<IMUSubscriber>(nh, "/kitti/oxts/imu", 1000000);
-  gnss_sub_ptr_ = std::make_shared<GNSSSubscriber>(nh, "/kitti/oxts/gps/fix", 1000000);
+  imu_sub_ptr_ = std::make_shared<IMUSubscriber>(nh,FrontParam::imu_config_.topic_name, 1000000);
+  gnss_sub_ptr_ = std::make_shared<GNSSSubscriber>(nh, FrontParam::gnss_config_.topic_name, 1000000);
   lidar_to_imu_ptr_ = std::make_shared<TFListener>(nh, "velo_link", "imu_link");
 
   cloud_pub_ptr_ = std::make_shared<CloudPublisher>(nh, "current_scan", 100, "/map");
