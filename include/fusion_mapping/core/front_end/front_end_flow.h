@@ -14,6 +14,7 @@
 #include "fusion_mapping/core/publisher/cloud_publisher.h"
 #include "fusion_mapping/core/publisher/odometry_publisher.h"
 #include "fusion_mapping/core/front_end/front_end.h"
+#include "fusion_mapping/core/param/front_param.h"
 
 namespace FM{
 class FrontEndFlow {
