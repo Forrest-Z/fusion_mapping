@@ -86,6 +86,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON) # 语言标准是否必须
 
 # <添加自定义cmake模块>
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(cmake/global_defination.cmake)
 
 # <构建类型>
 # ON:构建动态库, OFF:构建静态库

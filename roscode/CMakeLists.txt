@@ -4,3 +4,4 @@ set(_rpath "\$ORIGIN/${_rel}")
 file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" rpath)
 
 add_subdirectory(tool_test)
+add_subdirectory(tool_front_end)

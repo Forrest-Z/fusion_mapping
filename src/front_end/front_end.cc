@@ -20,7 +20,7 @@ FrontEnd::FrontEnd()
 }
 
 bool FrontEnd::InitWithConfig() {
-  std::string config_file_path ="/home/linsin/catkin_ws/src/fusion_mapping/param/front_end_config.yaml";
+  std::string config_file_path = WORK_SPACE_PATH + "/config/front_end/config.yaml";
   YAML::Node config_node = YAML::LoadFile(config_file_path);
 
   InitDataPath(config_node);
@@ -42,7 +42,7 @@ bool FrontEnd::InitParam(const YAML::Node& config_node) {
 bool FrontEnd::InitDataPath(const YAML::Node& config_node) {
   data_path_ = config_node["data_path"].as<std::string>();
   if (data_path_ == "./") {
-    data_path_ = "/home/linsin/catkin_ws/src/fusion_mapping";
+    data_path_ = WORK_SPACE_PATH;
   }
   data_path_ += "/slam_data";
 
