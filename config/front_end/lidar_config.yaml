@@ -1,0 +1,22 @@
+topic-name: /kitti/velo/pointcloud #lidar topic name
+ring-number:
+  - 16
+horizontal-resolution:
+  - 0.2
+vertical-resolution:
+  - 2
+closed-resolution:
+  - 0.3
+
+
+
+sensor-height:
+  - 0.6
+ground-seeds-threshold:
+  - 1.2
+num-ground-iterator:
+  - 10
+ground-distance-threshold:
+  - 0.3
+num-lpr:
+  - 20

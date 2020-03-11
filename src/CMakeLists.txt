@@ -8,6 +8,7 @@ list(APPEND dir
         models/cloud_filter
         models/registration
         front_end
+        param
   )
 
 foreach(_dir ${dir})
