@@ -7,6 +7,7 @@ list(APPEND dir
         sensor_data
         models/cloud_filter
         models/registration
+        front_end
   )
 
 foreach(_dir ${dir})

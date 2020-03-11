@@ -43,12 +43,7 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-catkin_package(
-        INCLUDE_DIRS include
-        LIBRARIES fusion_mapping
-        CATKIN_DEPENDS roscpp nodelet velodyne_pointcloud
 
-)
 
 include_directories(
         include
@@ -58,7 +53,22 @@ include_directories(
         ${GFLAGS_INCLUDE_DIRS}
 )
 
+add_service_files(
+        FILES
+        saveMap.srv
+)
 
+generate_messages(
+        DEPENDENCIES
+        std_msgs
+)
+
+catkin_package(
+        INCLUDE_DIRS include
+        LIBRARIES fusion_mapping
+        CATKIN_DEPENDS roscpp nodelet velodyne_pointcloud
+
+)
 
 # <构建类型>
 if(NOT CMAKE_BUILD_TYPE)
