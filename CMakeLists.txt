@@ -5,6 +5,7 @@ project(fusion_mapping
 add_compile_options(-fPIC)
 
 
+
 find_package(catkin REQUIRED COMPONENTS
         roscpp
         rospy
@@ -49,12 +50,11 @@ catkin_package(
 )
 
 include_directories(
-        3rdparty
         ${Boost_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
         ${GFLAGS_INCLUDE_DIRS}
 )
-include(cmake/global_defination.cmake)
+
 
 
 # <构建类型>
@@ -95,10 +95,10 @@ include(CPackProcess)
 #set(CMAKE_INSTALL_PREFIX /usr/local)                   # 系统目录
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)  # 构建目录
 
-include(InstallProcess)
-setup_output()
-setup_install()
-setup_uninstall()
+#include(InstallProcess)
+#setup_output()
+#setup_install()
+#setup_uninstall()
 
 # <构建>
 option(BUILD_DOC "Build docs" OFF)

@@ -2,12 +2,14 @@ set(target_name core)
 
 list(APPEND dir
         subscriber
+        Geocentric
   )
 
 foreach(_dir ${dir})
     file(GLOB     _src_file       ${CMAKE_CURRENT_SOURCE_DIR}/${_dir}/*.cc)
     list(APPEND   src_file        ${_src_file})
 endforeach()
+
 
 
 if(BUILD_SHARED)
@@ -37,6 +39,7 @@ target_link_libraries(${target_name}
         ${GFLAGS_LIBRARIES}
         ${YAML_CPP_LIBRARIES}
         ${OpenCV_LIBS}
+
   )
 
 set_target_properties(${target_name}
