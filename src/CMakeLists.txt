@@ -5,6 +5,8 @@ list(APPEND dir
         publisher
         tf_listener
         sensor_data
+        models/cloud_filter
+        models/registration
   )
 
 foreach(_dir ${dir})
