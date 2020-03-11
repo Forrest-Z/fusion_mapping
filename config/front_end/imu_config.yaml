@@ -1,1 +1,2 @@
-topic-name: /kitti/oxts/imu #imu topic name
+topic-name:
+  - /kitti/oxts/imu #imu topic name
