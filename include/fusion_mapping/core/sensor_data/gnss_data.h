@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-#include "fusion_mapping/core/Geocentric/LocalCartesian.hpp"
+#include "Geocentric/LocalCartesian.hpp"
 
 using std::vector;
 using std::string;

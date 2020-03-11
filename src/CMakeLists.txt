@@ -2,7 +2,9 @@ set(target_name core)
 
 list(APPEND dir
         subscriber
-        Geocentric
+        publisher
+        tf_listener
+        sensor_data
   )
 
 foreach(_dir ${dir})
@@ -21,6 +23,7 @@ endif()
 target_sources(${target_name}
   PRIVATE
     ${src_file}
+
   )
 
 target_include_directories(${target_name}
@@ -39,7 +42,8 @@ target_link_libraries(${target_name}
         ${GFLAGS_LIBRARIES}
         ${YAML_CPP_LIBRARIES}
         ${OpenCV_LIBS}
-
+        ${catkin_LIBRARIES}
+        libGeographiccc
   )
 
 set_target_properties(${target_name}

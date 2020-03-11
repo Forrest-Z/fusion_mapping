@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
         geometry_msgs
         tf
         eigen_conversions
+        tf2
         )
 
 FIND_LIBRARY(YAML_CPP_LIBRARIES yaml-cpp)
@@ -50,6 +51,8 @@ catkin_package(
 )
 
 include_directories(
+        include
+        3rdparty/GeographicLib/include
         ${Boost_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
         ${GFLAGS_INCLUDE_DIRS}
@@ -79,8 +82,10 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(BUILD_SHARED "Build shared library" ON)
 
 # <全局变量>
-set(NAMESPACE            fusion_mapping)       # 命名空间
-set(CMAKEFILE_PREFIX     FusionMapping)   # .cmake前缀，<Namesoace><Packagename>
+#set(NAMESPACE            fusion_mapping)       # 命名空间
+#set(CMAKEFILE_PREFIX     FusionMapping)   # .cmake前缀，<Namesoace><Packagename>
+
+
 
 # <打包>
 # 命令：cpack --config CPackConfig.cmake
@@ -109,8 +114,9 @@ endif()
 add_subdirectory(3rdparty)                      # 第三方库
 add_subdirectory(include)                       # 头文件
 add_subdirectory(src)                           # 源文件
+add_subdirectory(roscode)
 
-option(BUILD_TOOL "Build tools" OFF)
+option(BUILD_TOOL "Build tools" ON)
 if(BUILD_TOOL)
     add_subdirectory(roscode)                      # 工具
 endif()

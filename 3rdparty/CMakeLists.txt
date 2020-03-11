@@ -1,1 +1,1 @@
-#add_subdirectory(GeographicLib)
+add_subdirectory(GeographicLib)
