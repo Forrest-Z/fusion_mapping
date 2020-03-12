@@ -160,10 +160,11 @@ bool FrontEndFlow::UpdateLaserOdometry() {
   if (!front_end_pose_inited) {
     front_end_pose_inited = true;
     front_end_ptr_->SetInitPose(gnss_odometry_);
-    return front_end_ptr_->Update(current_cloud_data_, laser_odometry_);
+    return front_end_ptr_->Update(current_cloud_data_, laser_odometry_); //初始化第一帧对齐
   }
 
   laser_odometry_ = Eigen::Matrix4f::Identity();
+  //初始化第一帧对齐
   return front_end_ptr_->Update(current_cloud_data_, laser_odometry_);
 }
 
