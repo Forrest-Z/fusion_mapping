@@ -19,6 +19,7 @@
 #include "fusion_mapping/core/subscriber/velocity_subscriber.h"
 #include "fusion_mapping/core/tools/file_manager.h"
 #include "fusion_mapping/core/global_defination/global_defination.h"
+#include "fusion_mapping/core/models/scan_adjust/distortion_adjust.h"
 
 namespace FM{
 class FrontEndFlow {
@@ -68,6 +69,7 @@ class FrontEndFlow {
   CloudData::CLOUD_PTR current_scan_ptr_;
   Eigen::Matrix4f gnss_odometry_ = Eigen::Matrix4f::Identity();
   Eigen::Matrix4f laser_odometry_ = Eigen::Matrix4f::Identity();
+  std::shared_ptr<DistortionAdjust> distortion_adjust_ptr_;
 };
 }
 
