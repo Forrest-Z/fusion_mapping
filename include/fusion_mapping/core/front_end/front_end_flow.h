@@ -15,6 +15,7 @@
 #include "fusion_mapping/core/publisher/odometry_publisher.h"
 #include "fusion_mapping/core/front_end/front_end.h"
 #include "fusion_mapping/core/param/front_param.h"
+#include "fusion_mapping/core/sensor_data/velocity_data.h"
 
 namespace FM{
 class FrontEndFlow {
