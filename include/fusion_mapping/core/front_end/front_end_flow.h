@@ -17,6 +17,8 @@
 #include "fusion_mapping/core/param/front_param.h"
 #include "fusion_mapping/core/sensor_data/velocity_data.h"
 #include "fusion_mapping/core/subscriber/velocity_subscriber.h"
+#include "fusion_mapping/core/tools/file_manager.h"
+#include "fusion_mapping/core/global_defination/global_defination.h"
 
 namespace FM{
 class FrontEndFlow {
@@ -36,6 +38,7 @@ class FrontEndFlow {
   bool UpdateGNSSOdometry();
   bool UpdateLaserOdometry();
   bool PublishData();
+  bool SaveTrajectory();
 
  private:
   std::shared_ptr<CloudSubscriber> cloud_sub_ptr_;
