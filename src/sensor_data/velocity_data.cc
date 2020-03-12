@@ -2,7 +2,7 @@
 // Created by linsin on 12/03/2020.
 //
 
-#include "fusion_mapping/core/sensor_data/velocity_data.hpp"
+#include "fusion_mapping/core/sensor_data/velocity_data.h"
 
 namespace FM {
 bool VelocityData::SyncData(std::deque<VelocityData>& UnsyncedData, std::deque<VelocityData>& SyncedData, double sync_time) {

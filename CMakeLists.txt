@@ -25,7 +25,6 @@ endif (NOT YAML_CPP_LIBRARIES)
 
 find_package(gflags REQUIRED)
 
-find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED filesystem program_options)
 
 find_package(Ceres REQUIRED)
@@ -125,7 +124,6 @@ endif()
 add_subdirectory(3rdparty)                      # 第三方库
 add_subdirectory(include)                       # 头文件
 add_subdirectory(src)                           # 源文件
-add_subdirectory(roscode)
 
 option(BUILD_TOOL "Build tools" ON)
 if(BUILD_TOOL)
@@ -136,7 +134,7 @@ endif()
 # <测试>
 # 命令：make CTEST_OUTPUT_ON_FAILURE=1 test
 #      ctest -V
-option(BUILD_TEST "Build test" ON)
+option(BUILD_TEST "Build test" OFF)
 if(BUILD_TEST)
     include(GtestProcess)
     setup_gtest()

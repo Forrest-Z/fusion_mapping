@@ -63,15 +63,15 @@ target_compile_options(${target_name}
     -std=c++11
   )
 
-install(
-  TARGETS
-    ${target_name}
-  EXPORT
-    ${CMAKEFILE_PREFIX}Targets
-  LIBRARY
-    DESTINATION ${INSTALL_LIBDIR}
-    COMPONENT lib
-  )
+#install(
+#  TARGETS
+#    ${target_name}
+#  EXPORT
+#    ${CMAKEFILE_PREFIX}Targets
+#  LIBRARY
+#    DESTINATION ${INSTALL_LIBDIR}
+#    COMPONENT lib
+#  )
 
 
 

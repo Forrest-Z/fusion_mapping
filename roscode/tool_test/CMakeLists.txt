@@ -27,15 +27,15 @@ target_compile_options(${target_name}
     -std=c++11
   )
 
-install(
-  TARGETS
-    ${target_name}
-  EXPORT
-    ${CMAKEFILE_PREFIX}Targets
-  RUNTIME
-    DESTINATION ${INSTALL_BINDIR}
-    COMPONENT bin
-  )
+#install(
+#  TARGETS
+#    ${target_name}
+#  EXPORT
+#    ${CMAKEFILE_PREFIX}Targets
+#  RUNTIME
+#    DESTINATION ${INSTALL_BINDIR}
+#    COMPONENT bin
+#  )
 
 
 
