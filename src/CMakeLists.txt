@@ -9,6 +9,7 @@ list(APPEND dir
         models/registration
         front_end
         param
+        tools
   )
 
 foreach(_dir ${dir})
