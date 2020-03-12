@@ -7,6 +7,7 @@ list(APPEND dir
         sensor_data
         models/cloud_filter
         models/registration
+        models/scan_adjust
         front_end
         param
         tools
