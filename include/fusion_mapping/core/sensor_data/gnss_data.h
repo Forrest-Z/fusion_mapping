@@ -6,6 +6,7 @@
 #define FUSION_MAPPING_INCLUDE_SENSOR_DATA_GNSS_DATA_H_
 
 #include <vector>
+#include <deque>
 #include <string>
 
 #include "Geocentric/LocalCartesian.hpp"
@@ -13,7 +14,7 @@
 using std::vector;
 using std::string;
 
-namespace FM{
+namespace FM {
 class GNSSData {
  public:
   double time = 0.0;
@@ -33,7 +34,7 @@ class GNSSData {
  public:
   void InitOriginPosition();
   void UpdateXYZ();
+  static bool SyncData(std::deque<GNSSData>& UnsyncedData, std::deque<GNSSData>& SyncedData, double sync_time);
 };
 }
-
 #endif //FUSION_MAPPING_INCLUDE_SENSOR_DATA_GNSS_DATA_H_
