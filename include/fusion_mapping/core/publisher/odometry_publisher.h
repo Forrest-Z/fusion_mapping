@@ -21,7 +21,13 @@ class OdometryPublisher {
                     int buff_size);
   OdometryPublisher() = default;
 
+  void Publish(const Eigen::Matrix4f& transform_matrix, double time);
   void Publish(const Eigen::Matrix4f& transform_matrix);
+
+  bool HasSubscribers();
+
+ private:
+  void PublishData(const Eigen::Matrix4f& transform_matrix, ros::Time time);
 
  private:
   ros::NodeHandle nh_;
@@ -29,5 +35,4 @@ class OdometryPublisher {
   nav_msgs::Odometry odometry_;
 };
 }
-
 #endif //FUSION_MAPPING_INCLUDE_PUBLISHER_ODEMETRY_PUBLISHER_H_

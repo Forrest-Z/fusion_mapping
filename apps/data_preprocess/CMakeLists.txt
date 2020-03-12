@@ -1,4 +1,4 @@
-set(target_name test_function)
+set(target_name data_preprocess_node)
 
 file(GLOB src_file ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 

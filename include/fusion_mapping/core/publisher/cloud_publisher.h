@@ -17,10 +17,17 @@ class CloudPublisher {
  public:
   CloudPublisher(ros::NodeHandle& nh,
                  std::string topic_name,
-                 size_t buff_size,
-                 std::string frame_id);
+                 std::string frame_id,
+                 size_t buff_size);
   CloudPublisher() = default;
-  void Publish(CloudData::CLOUD_PTR cloud_ptr_input);
+
+  void Publish(CloudData::CLOUD_PTR& cloud_ptr_input, double time);
+  void Publish(CloudData::CLOUD_PTR& cloud_ptr_input);
+
+  bool HasSubscribers();
+
+ private:
+  void PublishData(CloudData::CLOUD_PTR& cloud_ptr_input, ros::Time time);
 
  private:
   ros::NodeHandle nh_;
@@ -28,5 +35,4 @@ class CloudPublisher {
   std::string frame_id_;
 };
 }
-
 #endif //FUSION_MAPPING_INCLUDE_PUBLISHER_CLOUD_PUBLISHER_H_

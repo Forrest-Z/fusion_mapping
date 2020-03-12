@@ -8,7 +8,10 @@ list(APPEND dir
         models/cloud_filter
         models/registration
         models/scan_adjust
-        front_end
+        data_preprocess
+        mapping/front_end
+        mapping/back_end
+        mapping/viewer
         param
         tools
   )

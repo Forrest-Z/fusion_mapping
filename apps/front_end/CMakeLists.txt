@@ -1,4 +1,4 @@
-set(target_name test_front_end)
+set(target_name front_end_node)
 
 file(GLOB src_file ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 

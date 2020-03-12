@@ -1,10 +1,12 @@
 //
-// Created by linsin on 14/02/2020.
+// Created by linsin on 12/03/2020.
 //
 
 #include <ros/ros.h>
 #include <pcl/common/transforms.h>
+#include "glog/logging.h"
 
+#include "fusion_mapping/core/global_defination/global_defination.h"
 #include "fusion_mapping/core/subscriber/cloud_subscriber.h"
 #include "fusion_mapping/core/subscriber/imu_subscriber.h"
 #include "fusion_mapping/core/subscriber/gnss_subscriber.h"
@@ -15,6 +17,9 @@
 using namespace FM;
 
 int main(int argc, char *argv[]) {
+  google::InitGoogleLogging(argv[0]);
+  FLAGS_log_dir = WORK_SPACE_PATH + "/Log";
+  FLAGS_alsologtostderr = 1;
 
   ros::init(argc, argv, "test_frame_node");
   ros::NodeHandle nh;
@@ -24,7 +29,7 @@ int main(int argc, char *argv[]) {
   std::shared_ptr<GNSSSubscriber> gnss_sub_ptr = std::make_shared<GNSSSubscriber>(nh, "/kitti/oxts/gps/fix", 1000000);
   std::shared_ptr<TFListener> lidar_to_imu_ptr = std::make_shared<TFListener>(nh, "velo_link", "imu_link");
 
-  std::shared_ptr<CloudPublisher> cloud_pub_ptr = std::make_shared<CloudPublisher>(nh, "current_scan", 100, "/map");
+  std::shared_ptr<CloudPublisher> cloud_pub_ptr = std::make_shared<CloudPublisher>(nh, "current_scan", "/map", 100);
   std::shared_ptr<OdometryPublisher> odom_pub_ptr = std::make_shared<OdometryPublisher>(nh, "lidar_odom", "map", "lidar", 100);
 
   std::deque<CloudData> cloud_data_buff;
