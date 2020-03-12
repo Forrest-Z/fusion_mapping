@@ -27,7 +27,6 @@
 #include "fusion_mapping/core/tf_listener/tf_listener.h"
 #include "fusion_mapping/core/publisher/cloud_publisher.h"
 #include "fusion_mapping/core/publisher/odometry_publisher.h"
-#include "fusion_mapping/core/front_end/front_end.h"
 #include "fusion_mapping/core/param/front_param.h"
 #include "fusion_mapping/core/sensor_data/velocity_data.h"
 #include "fusion_mapping/core/subscriber/velocity_subscriber.h"
