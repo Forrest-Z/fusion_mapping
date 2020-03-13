@@ -5,6 +5,10 @@ project(fusion_mapping
 add_compile_options(-fPIC)
 
 
+# <添加自定义cmake模块>
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(cmake/global_defination.cmake)
+include(cmake/g2o.cmake)
 
 find_package(catkin REQUIRED COMPONENTS
         roscpp
@@ -41,7 +45,6 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-
 
 
 include_directories(
@@ -83,9 +86,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON) # 语言标准是否必须
 # OFF:如果此版本不可用,CMake将查找标准的下一个版本
 #     c++17->c++14->c++11->c++98
 
-# <添加自定义cmake模块>
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-include(cmake/global_defination.cmake)
+
+
 
 # <构建类型>
 # ON:构建动态库, OFF:构建静态库
