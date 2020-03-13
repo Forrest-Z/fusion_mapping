@@ -6,10 +6,13 @@
 * GLOG
 * OPENCV3
 * Eigen3.3.1
+* G2O
 
 ## Run
 ### Map save
 > rosservice call /save_map
+### Optimize 
+> rosservice call /optimize_map
 
 
 ## Evaluate
