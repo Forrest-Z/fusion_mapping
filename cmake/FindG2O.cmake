@@ -1,4 +1,5 @@
 # Find the header files
+
 FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
   ${G2O_ROOT}/include
   $ENV{G2O_ROOT}/include
@@ -8,8 +9,7 @@ FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
   /opt/local/include
   /sw/local/include
   /sw/include
-  # /opt/ros/$ENV{ROS_DISTRO}/include
-  NO_DEFAULT_PATH
+  #NO_DEFAULT_PATH
   )
 
 # Macro to unify finding both the debug and release versions of the
@@ -25,7 +25,6 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
     ${G2O_ROOT}/lib
     $ENV{G2O_ROOT}/lib/Debug
     $ENV{G2O_ROOT}/lib
-    # /opt/ros/$ENV{ROS_DISTRO}/lib
     NO_DEFAULT_PATH
     )
 
@@ -41,22 +40,20 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
     /opt/local/lib
     /sw/local/lib
     /sw/lib
-    NO_DEFAULT_PATH
     )
-
+  
   FIND_LIBRARY(${MYLIBRARY}
-    NAMES "libg2o_${MYLIBRARYNAME}.so"
+    NAMES "g2o_${MYLIBRARYNAME}"
     PATHS
     ${G2O_ROOT}/lib/Release
     ${G2O_ROOT}/lib
     $ENV{G2O_ROOT}/lib/Release
     $ENV{G2O_ROOT}/lib
-    # /opt/ros/$ENV{ROS_DISTRO}/lib
     NO_DEFAULT_PATH
     )
 
   FIND_LIBRARY(${MYLIBRARY}
-    NAMES "libg2o_${MYLIBRARYNAME}.so"
+    NAMES "g2o_${MYLIBRARYNAME}"
     PATHS
     ~/Library/Frameworks
     /Library/Frameworks
@@ -67,15 +64,15 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
     /opt/local/lib
     /sw/local/lib
     /sw/lib
-    NO_DEFAULT_PATH
     )
+  
   IF(NOT ${MYLIBRARY}_DEBUG)
     IF(MYLIBRARY)
       SET(${MYLIBRARY}_DEBUG ${MYLIBRARY})
     ENDIF(MYLIBRARY)
   ENDIF( NOT ${MYLIBRARY}_DEBUG)
-
-ENDMACRO()
+  
+ENDMACRO(FIND_G2O_LIBRARY LIBRARY LIBRARYNAME)
 
 # Find the core elements
 FIND_G2O_LIBRARY(G2O_STUFF_LIBRARY stuff)
@@ -102,7 +99,6 @@ FIND_G2O_LIBRARY(G2O_TYPES_SCLAM2D types_sclam2d)
 FIND_G2O_LIBRARY(G2O_TYPES_SIM3 types_sim3)
 FIND_G2O_LIBRARY(G2O_TYPES_SLAM2D types_slam2d)
 FIND_G2O_LIBRARY(G2O_TYPES_SLAM3D types_slam3d)
-FIND_G2O_LIBRARY(G2O_TYPES_SLAM3D_ADDONS types_slam3d_addons)
 
 # G2O solvers declared found if we found at least one solver
 SET(G2O_SOLVERS_FOUND "NO")
@@ -115,15 +111,3 @@ SET(G2O_FOUND "NO")
 IF(G2O_STUFF_LIBRARY AND G2O_CORE_LIBRARY AND G2O_INCLUDE_DIR AND G2O_SOLVERS_FOUND)
   SET(G2O_FOUND "YES")
 ENDIF(G2O_STUFF_LIBRARY AND G2O_CORE_LIBRARY AND G2O_INCLUDE_DIR AND G2O_SOLVERS_FOUND)
-
-# 加入引用文件和库文件中去
-include_directories(SYSTEM ${G2O_INCLUDE_DIR})
-list(APPEND ALL_TARGET_LIBRARIES 
-      ${G2O_TYPES_DATA}
-      ${G2O_CORE_LIBRARY}
-      ${G2O_STUFF_LIBRARY}
-      ${G2O_SOLVER_PCG}
-      ${G2O_SOLVER_CSPARSE}
-      ${G2O_SOLVER_CHOLMOD}
-      ${G2O_TYPES_SLAM3D}
-      ${G2O_TYPES_SLAM3D_ADDONS})

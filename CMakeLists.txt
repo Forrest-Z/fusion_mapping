@@ -8,7 +8,9 @@ add_compile_options(-fPIC)
 # <添加自定义cmake模块>
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(cmake/global_defination.cmake)
-include(cmake/g2o.cmake)
+include(cmake/FindG2O.cmake)
+include(cmake/FindCholmod.cmake)
+include(cmake/FindCSparse.cmake)
 
 find_package(catkin REQUIRED COMPONENTS
         roscpp
@@ -46,6 +48,11 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+find_package(G2O REQUIRED)
+include_directories(${G2O_INCLUDE_DIRS})
+
+find_package(Cholmod REQUIRED)
+include_directories(${CHOLMOD_INCLUDE_DIR})
 
 include_directories(
         include
@@ -58,6 +65,7 @@ include_directories(
 add_service_files(
         FILES
         saveMap.srv
+        optimizeMap.srv
 )
 
 generate_messages(

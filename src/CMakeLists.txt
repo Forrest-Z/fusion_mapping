@@ -8,6 +8,9 @@ list(APPEND dir
         models/cloud_filter
         models/registration
         models/scan_adjust
+        models/graph_optimizer/g2o
+        models/graph_optimizer
+        models/graph_optimizer/g2o/edge
         data_preprocess
         mapping/front_end
         mapping/back_end
@@ -52,6 +55,14 @@ target_link_libraries(${target_name}
         ${YAML_CPP_LIBRARIES}
         ${OpenCV_LIBS}
         ${catkin_LIBRARIES}
+        ${G2O_TYPES_DATA}
+        ${G2O_CORE_LIBRARY}
+        ${G2O_STUFF_LIBRARY}
+        ${G2O_SOLVER_PCG}
+        ${G2O_SOLVER_CSPARSE}
+        ${G2O_SOLVER_CHOLMOD}
+        ${G2O_TYPES_SLAM3D}
+        ${G2O_TYPES_SLAM3D_ADDONS}
         libGeographiccc
   )
 
