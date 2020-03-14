@@ -7,6 +7,8 @@
 
 
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include "sensor_msgs/NavSatFix.h"
 #include "fusion_mapping/core/sensor_data/gnss_data.h"
@@ -26,6 +28,7 @@ class GNSSSubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<GNSSData> new_gnss_data_;
+  std::mutex buff_mutex_;
 };
 }
 

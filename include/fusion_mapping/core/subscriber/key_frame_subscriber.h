@@ -5,6 +5,8 @@
 #ifndef FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_KEY_FRAME_SUBSCRIBER_H_
 #define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_KEY_FRAME_SUBSCRIBER_H_
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 
@@ -25,6 +27,7 @@ class KeyFrameSubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<KeyFrame> new_key_frame_;
+  std::mutex buff_mutex_;
 };
 }
 #endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_KEY_FRAME_SUBSCRIBER_H_

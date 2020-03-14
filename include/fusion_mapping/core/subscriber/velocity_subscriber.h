@@ -6,6 +6,8 @@
 #define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_VELOCITY_SUBSCRIBER_H_
 
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include "geometry_msgs/TwistStamped.h"
 #include "fusion_mapping/core/sensor_data/velocity_data.h"
@@ -25,6 +27,7 @@ class VelocitySubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<VelocityData> new_velocity_data_;
+  std::mutex buff_mutex_;
 };
 }
 

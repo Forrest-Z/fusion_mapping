@@ -6,6 +6,8 @@
 #define FUSION_MAPPING_INCLUDE_SUBSCRIBER_IMU_SUBSCRIBER_H_
 
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include "sensor_msgs/Imu.h"
 #include "fusion_mapping/core/sensor_data/imu_data.h"
@@ -25,6 +27,7 @@ class IMUSubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<IMUData> new_imu_data_;
+  std::mutex buff_mutex_;
 };
 }
 

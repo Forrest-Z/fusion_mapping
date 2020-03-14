@@ -5,6 +5,8 @@
 #ifndef FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_ODOMETRY_SUBSCRIBER_H_
 #define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_ODOMETRY_SUBSCRIBER_H_
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
 #include "fusion_mapping/core/sensor_data/pose_data.h"
@@ -24,6 +26,7 @@ class OdometrySubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<PoseData> new_pose_data_;
+  std::mutex buff_mutex_;
 };
 }
 #endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_ODOMETRY_SUBSCRIBER_H_

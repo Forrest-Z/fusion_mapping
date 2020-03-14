@@ -6,6 +6,8 @@
 #define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_LOOP_POSE_SUBSCRIBER_H_
 
 #include <deque>
+#include <mutex>
+#include <thread>
 #include <ros/ros.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include "fusion_mapping/core/sensor_data/loop_pose.h"
@@ -25,6 +27,7 @@ class LoopPoseSubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<LoopPose> new_loop_pose_;
+  std::mutex buff_mutex_;
 };
 }
 #endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_LOOP_POSE_SUBSCRIBER_H_
