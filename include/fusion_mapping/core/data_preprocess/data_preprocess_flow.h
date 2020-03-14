@@ -37,7 +37,7 @@
 namespace FM{
 class DataPreprocessFlow {
  public:
-  DataPreprocessFlow(ros::NodeHandle& nh);
+  DataPreprocessFlow(ros::NodeHandle& nh, std::string cloud_topic);
 
   bool Run();
 

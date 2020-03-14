@@ -5,9 +5,9 @@
 #include "fusion_mapping/core/mapping/viewer/viewer_flow.h"
 
 namespace FM {
-ViewerFlow::ViewerFlow(ros::NodeHandle& nh) {
+ViewerFlow::ViewerFlow(ros::NodeHandle& nh, std::string cloud_topic) {
   // subscriber
-  cloud_sub_ptr_ = std::make_shared<CloudSubscriber>(nh, "/synced_cloud", 100000);
+  cloud_sub_ptr_ = std::make_shared<CloudSubscriber>(nh, cloud_topic, 100000);
   key_frame_sub_ptr_ = std::make_shared<KeyFrameSubscriber>(nh, "/key_frame", 100000);
   transformed_odom_sub_ptr_ = std::make_shared<OdometrySubscriber>(nh, "/transformed_odom", 100000);
   optimized_key_frames_sub_ptr_ = std::make_shared<KeyFramesSubscriber>(nh, "/optimized_key_frames", 100000);

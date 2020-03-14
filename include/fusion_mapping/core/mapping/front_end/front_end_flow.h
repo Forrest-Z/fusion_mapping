@@ -13,7 +13,7 @@
 namespace FM {
 class FrontEndFlow {
  public:
-  FrontEndFlow(ros::NodeHandle& nh);
+  FrontEndFlow(ros::NodeHandle& nh, std::string cloud_topic, std::string odom_topic);
 
   bool Run();
 

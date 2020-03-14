@@ -17,8 +17,8 @@
 namespace FM {
 class BackEndFlow {
  public:
-  BackEndFlow(ros::NodeHandle& nh);
 
+  BackEndFlow(ros::NodeHandle& nh, std::string cloud_topic, std::string odom_topic);
   bool Run();
 
   bool ForceOptimize();
