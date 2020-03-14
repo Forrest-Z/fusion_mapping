@@ -9,9 +9,11 @@ BackEndFlow::BackEndFlow(ros::NodeHandle& nh) {
   cloud_sub_ptr_ = std::make_shared<CloudSubscriber>(nh, "/synced_cloud", 100000);
   gnss_pose_sub_ptr_ = std::make_shared<OdometrySubscriber>(nh, "/synced_gnss", 100000);
   laser_odom_sub_ptr_ = std::make_shared<OdometrySubscriber>(nh, "/laser_odom", 100000);
+  loop_pose_sub_ptr_ = std::make_shared<LoopPoseSubscriber>(nh, "/loop_pose", 100000);
 
   transformed_odom_pub_ptr_ = std::make_shared<OdometryPublisher>(nh, "/transformed_odom", "/map", "/lidar", 100);
   key_frame_pub_ptr_ = std::make_shared<KeyFramePublisher>(nh, "/key_frame", "/map", 100);
+  key_gnss_pub_ptr_ = std::make_shared<KeyFramePublisher>(nh, "/key_gnss", "/map", 100);
   key_frames_pub_ptr_ = std::make_shared<KeyFramesPublisher>(nh, "/optimized_key_frames", "/map", 100);
 
   back_end_ptr_ = std::make_shared<BackEnd>();
@@ -20,6 +22,8 @@ BackEndFlow::BackEndFlow(ros::NodeHandle& nh) {
 bool BackEndFlow::Run() {
   if (!ReadData())
     return false;
+
+  MaybeInsertLoopPose();
 
   while(HasData()) {
     if (!ValidData())
@@ -32,21 +36,31 @@ bool BackEndFlow::Run() {
 
   return true;
 }
+
 bool BackEndFlow::ForceOptimize() {
-    back_end_ptr_->ForceOptimize();
-    if (back_end_ptr_->HasNewOptimized()) {
-        std::deque<KeyFrame> optimized_key_frames;
-        back_end_ptr_->GetOptimizedKeyFrames(optimized_key_frames);
-        key_frames_pub_ptr_->Publish(optimized_key_frames);
-    }
-    return true;
+  back_end_ptr_->ForceOptimize();
+  if (back_end_ptr_->HasNewOptimized()) {
+    std::deque<KeyFrame> optimized_key_frames;
+    back_end_ptr_->GetOptimizedKeyFrames(optimized_key_frames);
+    key_frames_pub_ptr_->Publish(optimized_key_frames);
+  }
+  return true;
 }
 
 bool BackEndFlow::ReadData() {
   cloud_sub_ptr_->ParseData(cloud_data_buff_);
   gnss_pose_sub_ptr_->ParseData(gnss_pose_data_buff_);
   laser_odom_sub_ptr_->ParseData(laser_odom_data_buff_);
+  loop_pose_sub_ptr_->ParseData(loop_pose_data_buff_);
 
+  return true;
+}
+
+bool BackEndFlow::MaybeInsertLoopPose() {
+  while (loop_pose_data_buff_.size() > 0) {
+    back_end_ptr_->InsertLoopPose(loop_pose_data_buff_.front());
+    loop_pose_data_buff_.pop_front();
+  }
   return true;
 }
 
@@ -109,8 +123,12 @@ bool BackEndFlow::PublishData() {
 
   if (back_end_ptr_->HasNewKeyFrame()) {
     KeyFrame key_frame;
+
     back_end_ptr_->GetLatestKeyFrame(key_frame);
     key_frame_pub_ptr_->Publish(key_frame);
+
+    back_end_ptr_->GetLatestKeyGNSS(key_frame);
+    key_gnss_pub_ptr_->Publish(key_frame);
   }
 
   if (back_end_ptr_->HasNewOptimized()) {

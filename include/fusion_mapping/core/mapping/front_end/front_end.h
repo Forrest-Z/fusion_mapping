@@ -19,8 +19,8 @@
 #include <yaml-cpp/yaml.h>
 
 #include "fusion_mapping/core/sensor_data/cloud_data.h"
-#include "fusion_mapping/core/models/registration/ndt_registration.h"
-#include "fusion_mapping/core/models/cloud_filter/voxel_filter.h"
+#include "fusion_mapping/core/models/registration/registration_interface.h"
+#include "fusion_mapping/core/models/cloud_filter/cloud_filter_interface.h"
 #include "fusion_mapping/core/global_defination/global_defination.h"
 
 namespace FM {

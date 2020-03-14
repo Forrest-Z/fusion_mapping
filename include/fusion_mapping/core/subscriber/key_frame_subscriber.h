@@ -6,7 +6,7 @@
 #define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_SUBSCRIBER_KEY_FRAME_SUBSCRIBER_H_
 #include <deque>
 #include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
 
 #include "fusion_mapping/core/sensor_data/key_frame.h"
 
@@ -18,7 +18,7 @@ class KeyFrameSubscriber {
   void ParseData(std::deque<KeyFrame>& key_frame_buff);
 
  private:
-  void msg_callback(const geometry_msgs::PoseStampedConstPtr& key_frame_msg_ptr);
+  void msg_callback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& key_frame_msg_ptr);
 
  private:
   ros::NodeHandle nh_;

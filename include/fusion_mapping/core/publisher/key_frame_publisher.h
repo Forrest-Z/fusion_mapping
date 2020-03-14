@@ -6,7 +6,7 @@
 #define FUSION_MAPPING_SRC_PUBLISHER_KEY_FRAME_PUBLISHER_H_
 #include <string>
 #include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
 
 #include "fusion_mapping/core/sensor_data/key_frame.h"
 
