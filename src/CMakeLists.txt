@@ -16,6 +16,7 @@ list(APPEND dir
         mapping/back_end
         mapping/viewer
         mapping/loop_closing
+        matching
         param
         tools
   )

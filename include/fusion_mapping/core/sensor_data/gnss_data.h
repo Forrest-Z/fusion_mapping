@@ -26,6 +26,9 @@ class GNSSData {
   double local_U = 0.0;
   int status = 0;
   int service = 0;
+  static double origin_longitude;
+  static double origin_latitude;
+  static double origin_altitude;
 
  private:
   static GeographicLib::LocalCartesian geo_converter;

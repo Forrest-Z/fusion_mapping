@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="rviz"  type="rviz"  name="rviz"  args="-d $(find fusion_mapping)/rviz/matching.rviz"></node>
+    <node pkg="fusion_mapping"  type="data_preprocess_node"  name="data_preprocess_node"  output="screen"></node>
+    <node pkg="fusion_mapping"  type="matching_node"  name="matching_node"  output="screen"></node>
+</launch>

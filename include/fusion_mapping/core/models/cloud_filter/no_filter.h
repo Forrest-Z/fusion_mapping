@@ -11,7 +11,7 @@ class NoFilter: public CloudFilterInterface {
  public:
   NoFilter();
 
-  bool Filter(CloudData::CLOUD_PTR& input_cloud_ptr, CloudData::CLOUD_PTR& filtered_cloud_ptr) override;
+  bool Filter(const CloudData::CLOUD_PTR& input_cloud_ptr, CloudData::CLOUD_PTR& filtered_cloud_ptr) override;
 };
 }
 #endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CLOUD_FILTER_NO_FILTER_H_
