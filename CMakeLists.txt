@@ -151,3 +151,4 @@ if(BUILD_TEST)
     enable_testing()
     add_subdirectory(test)                      # 测试
 endif()
+add_subdirectory(test)                      # 测试
