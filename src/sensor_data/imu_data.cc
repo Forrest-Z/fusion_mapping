@@ -5,6 +5,7 @@
 #include "fusion_mapping/core/sensor_data/imu_data.h"
 
 #include <cmath>
+#include <iostream>
 
 namespace FM {
 Eigen::Matrix3f IMUData::GetOrientationMatrix() {
@@ -25,6 +26,7 @@ bool IMUData::SyncData(std::deque<IMUData>& UnsyncedData, std::deque<IMUData>& S
       UnsyncedData.pop_front();
       continue;
     }
+    printf("before: %lf unsy: %lf sy: %lf %d \n", UnsyncedData.front().time, UnsyncedData.at(1).time,  sync_time, int(UnsyncedData.at(1).time < sync_time));
     if (sync_time - UnsyncedData.front().time > 0.2) {
       UnsyncedData.pop_front();
       break;

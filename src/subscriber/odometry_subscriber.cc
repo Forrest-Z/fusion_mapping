@@ -28,6 +28,7 @@ void OdometrySubscriber::msg_callback(const nav_msgs::OdometryConstPtr& odom_msg
   pose_data.pose.block<3,3>(0,0) = q.matrix();
 
   new_pose_data_.push_back(pose_data);
+  new_odom_data_.push_back(*odom_msg_ptr);
   buff_mutex_.unlock();
 }
 
@@ -36,6 +37,14 @@ void OdometrySubscriber::ParseData(std::deque<PoseData>& pose_data_buff) {
   if (new_pose_data_.size() > 0) {
     pose_data_buff.insert(pose_data_buff.end(), new_pose_data_.begin(), new_pose_data_.end());
     new_pose_data_.clear();
+  }
+  buff_mutex_.unlock();
+}
+void OdometrySubscriber::ParseData(std::deque<nav_msgs::Odometry>& odom_data_buff) {
+  buff_mutex_.lock();
+  if (new_odom_data_.size() > 0) {
+    odom_data_buff.insert(odom_data_buff.end(), new_odom_data_.begin(), new_odom_data_.end());
+    new_odom_data_.clear();
   }
   buff_mutex_.unlock();
 }

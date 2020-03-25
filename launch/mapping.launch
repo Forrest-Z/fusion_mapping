@@ -1,5 +1,10 @@
 <launch>
+    <node pkg="tf" type="static_transform_publisher" name="base_imu"
+          args="0 0 0 0 0 0 /base_link /imu_link 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="imu_velo"
+          args="0 0 0 0 0 0 /imu_link /velo_link 10"/>
     <node pkg="rviz"  type="rviz"  name="rviz"  args="-d $(find fusion_mapping)/rviz/mapping.rviz"></node>
+    <node pkg="fusion_mapping"  type="mapping_car_preprocess_node"  name="mapping_car_preprocess_node" respawn="true"  output="screen"></node>
     <node pkg="fusion_mapping"  type="data_preprocess_node"  name="data_preprocess_node" respawn="true"  output="screen"></node>
     <node pkg="fusion_mapping"  type="front_end_node"  name="front_end_node"  output="screen"></node>
     <node pkg="fusion_mapping"  type="back_end_node"  name="back_end_node"  output="screen"></node>

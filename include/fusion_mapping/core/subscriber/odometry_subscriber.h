@@ -16,7 +16,8 @@ class OdometrySubscriber {
  public:
   OdometrySubscriber(ros::NodeHandle& nh, std::string topic_name, size_t buff_size);
   OdometrySubscriber() = default;
-  void ParseData(std::deque<PoseData>& deque_pose_data);
+  void ParseData(std::deque<PoseData>& pose_data_buff);
+  void ParseData(std::deque<nav_msgs::Odometry>& odom_data_buff);
 
  private:
   void msg_callback(const nav_msgs::OdometryConstPtr& odom_msg_ptr);
@@ -26,6 +27,7 @@ class OdometrySubscriber {
   ros::Subscriber subscriber_;
 
   std::deque<PoseData> new_pose_data_;
+  std::deque<nav_msgs::Odometry> new_odom_data_;
   std::mutex buff_mutex_;
 };
 }
