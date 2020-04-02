@@ -19,6 +19,7 @@ list(APPEND dir
         matching
         param
         tools
+        models/feature
   )
 
 foreach(_dir ${dir})
