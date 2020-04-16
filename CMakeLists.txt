@@ -134,6 +134,7 @@ endif()
 add_subdirectory(3rdparty)                      # 第三方库
 add_subdirectory(include)                       # 头文件
 add_subdirectory(src)                           # 源文件
+add_subdirectory(example)                           # 源文件
 
 option(BUILD_APPS "Build tools" ON)
 if(BUILD_APPS)
