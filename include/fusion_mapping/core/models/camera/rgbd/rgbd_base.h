@@ -2,8 +2,8 @@
 // Created by linsin on 16/04/2020.
 //
 
-#ifndef FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_IMAGE_TO_CLOUD_H_
-#define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_IMAGE_TO_CLOUD_H_
+#ifndef FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_RGBD_BASE_H_
+#define FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_RGBD_BASE_H_
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -14,10 +14,10 @@
 #include <string>
 
 namespace FM{
-class ImageToCloud{
+class RGBDBase{
  public:
-  ImageToCloud() = default;
-  ImageToCloud(double camera_factor, double camera_cx, double camera_cy, double camera_fx, double camera_fy):
+  RGBDBase() = default;
+  RGBDBase(double camera_factor, double camera_cx, double camera_cy, double camera_fx, double camera_fy):
   camera_factor_(camera_factor), camera_cx_(camera_cx), camera_cy_(camera_cy), camera_fx_(camera_fx), camera_fy_(camera_fy) {};
   pcl::PointCloud<pcl::PointXYZRGBA> getPointCloud(cv::Mat& rgb, cv::Mat& depth);
 
@@ -30,4 +30,4 @@ class ImageToCloud{
 };
 }
 
-#endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_IMAGE_TO_CLOUD_H_
+#endif //FUSION_MAPPING_INCLUDE_FUSION_MAPPING_CORE_MODELS_CAMERA_RGBD_RGBD_BASE_H_

@@ -2,10 +2,10 @@
 // Created by linsin on 16/04/2020.
 //
 
-#include "fusion_mapping/core/models/camera/rgbd/image_to_cloud.h"
+#include "fusion_mapping/core/models/camera/rgbd/rgbd_base.h"
 
 namespace FM{
-pcl::PointCloud<pcl::PointXYZRGBA> ImageToCloud::getPointCloud(cv::Mat &rgb, cv::Mat &depth) {
+pcl::PointCloud<pcl::PointXYZRGBA> RGBDBase::getPointCloud(cv::Mat &rgb, cv::Mat &depth) {
   pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBA>);
   int row_si = depth.rows;
   int col_si = depth.cols;
