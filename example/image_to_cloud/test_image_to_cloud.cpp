@@ -3,6 +3,7 @@
 //
 
 #include "fusion_mapping/core/models/camera/rgbd/rgbd_base.h"
+#include "fusion_mapping/core/models/feature/cylinder.h"
 #include <pcl/point_types.h>
 #include <pcl/io/io.h>
 
@@ -24,5 +25,16 @@ int main(int argc, char** argv) {
   cloud->width = cloud->size();
   cloud->is_dense = false;
   pcl::io::savePCDFileASCII("/home/linsin/fuck/cylinder.pcd", *cloud);
+
+  FM::CylinderCoefficient final_params;
+  FM::CylinderRelated cylinder_related;
+  final_params = cylinder_related.CylinderFitting(*cloud);
+  std::cout << final_params.x <<  " = x "
+  << final_params.y << " =y "
+  << final_params.z << " =z "
+  << final_params.l << " =l "
+  << final_params.m << " =m "
+  << final_params.n << " =n "
+  << final_params.r << " =r " << std::endl;
 }
 

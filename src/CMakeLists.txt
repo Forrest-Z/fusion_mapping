@@ -12,6 +12,7 @@ list(APPEND dir
         models/graph_optimizer
         models/graph_optimizer/g2o/edge
         models/camera/rgbd
+        models/feature
         data_preprocess
         mapping/front_end
         mapping/back_end
