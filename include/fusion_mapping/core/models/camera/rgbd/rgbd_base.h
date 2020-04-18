@@ -20,8 +20,9 @@ class RGBDBase{
   RGBDBase(double camera_factor, double camera_cx, double camera_cy, double camera_fx, double camera_fy):
   camera_factor_(camera_factor), camera_cx_(camera_cx), camera_cy_(camera_cy), camera_fx_(camera_fx), camera_fy_(camera_fy) {};
   pcl::PointCloud<pcl::PointXYZRGBA> getPointCloud(cv::Mat& rgb, cv::Mat& depth);
+  cv::Point3f point2DTo3D(cv::Point3f& point);
 
- private:
+ public:
   double camera_factor_ = 1000;
   double camera_cx_ = 325.5;
   double camera_cy_ = 235.5;

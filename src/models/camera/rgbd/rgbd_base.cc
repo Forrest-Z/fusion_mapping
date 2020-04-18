@@ -28,4 +28,12 @@ pcl::PointCloud<pcl::PointXYZRGBA> RGBDBase::getPointCloud(cv::Mat &rgb, cv::Mat
     return *cloud;
   }
 }
+
+cv::Point3f RGBDBase::point2DTo3D(cv::Point3f &point) {
+  cv::Point3f p;
+  p.z = double( point.z ) / camera_factor_;
+  p.x = ( point.x - camera_cx_) * p.z / camera_fx_;
+  p.y = ( point.y - camera_cy_) * p.z / camera_fy_;
+  return p;
+}
 }
