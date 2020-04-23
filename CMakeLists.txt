@@ -56,6 +56,7 @@ include_directories(${CHOLMOD_INCLUDE_DIR})
 
 include_directories(
         include
+        include/fusion_mapping/core
         3rdparty/GeographicLib/include
         ${Boost_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
@@ -134,6 +135,7 @@ endif()
 add_subdirectory(3rdparty)                      # 第三方库
 add_subdirectory(include)                       # 头文件
 add_subdirectory(src)                           # 源文件
+add_subdirectory(example)
 
 option(BUILD_APPS "Build tools" ON)
 if(BUILD_APPS)

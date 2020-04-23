@@ -6,12 +6,15 @@
 
 namespace FM{
 pcl::PointCloud<PointTypeGround> GroundFeature::groundFeature(pcl::PointCloud<FM::PointTypeGround> &raw_points) {
-  for(int i = 0; i < 20 ; ++i) {
-    for(int j = 0 ; j < 20; ++j) {
-      fragment_points_[i][j].clear();
-    }
+  g_ground_pc_.reset(new pcl::PointCloud<PointTypeGround>());
+  g_non_ground_pc_.reset(new pcl::PointCloud<PointTypeGround>());
+  g_seeds_pc_.reset(new pcl::PointCloud<PointTypeGround>());
+  int si = raw_points.points.size();
+  for(int i = 0 ; i < si ; ++i) {
+    raw_points.points.at(i).intensity = 1;
   }
-  SeparateGround(raw_points);
+
+  SinglePartExtract(raw_points);
 }
 void GroundFeature::SeparateGround(pcl::PointCloud<FM::PointTypeGround> &all_points) {
   double max_x = 0.0, max_y = 0.0;

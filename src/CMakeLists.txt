@@ -11,6 +11,7 @@ list(APPEND dir
         models/graph_optimizer/g2o
         models/graph_optimizer
         models/graph_optimizer/g2o/edge
+        models/feature
         data_preprocess
         mapping/front_end
         mapping/back_end

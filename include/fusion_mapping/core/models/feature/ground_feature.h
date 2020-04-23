@@ -39,12 +39,12 @@ class GroundFeature{
   double y_low_limitation_[20];
 
   int x_fragment_number_ = 5, y_fragment_number_ = 5;
-  int num_ground_iterator_ = 10;
-  int num_lpr_ = 20;
+  int num_ground_iterator_ = 20; // 优化次数
+  int num_lpr_ = 10;  // 选取的lpr个数
 
   double sensor_height_ = 0.6;
-  double ground_seeds_threshold_ = 1.2;
-  double ground_distance_threshold_ = 0.3;
+  double ground_seeds_threshold_ = 0.5; // 用于选取种子点的阈值，当点云内的点的高度小于LPR的高度加上此阈值时，我们将该点加入种子点集
+  double ground_distance_threshold_ = 0.1; // 平面距离阈值，我们会计算点云中每一个点到我们拟合的平面的正交投影的距离，而这个平面距离阈值，就是用来判定点是否属于地面
 
   float d_;
   Eigen::MatrixXf normal_;
