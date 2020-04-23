@@ -144,4 +144,33 @@ void GroundFeature::EstimatePlane() {
   // return the equation parameters
 }
 
+pcl::PointCloud<PointTypeGround> GroundFeature::groundWithSAC(pcl::PointCloud<PointTypeGround> &raw_points,
+                                                              Eigen::Vector3d &ground_normal) {
+  pcl::SACSegmentation<PointTypeGround> segmentation;
+  pcl::PointCloud<PointTypeGround> cloud_projected;
+  pcl::PointCloud<PointTypeGround>::Ptr cloud_filtered(new pcl::PointCloud<PointTypeGround>);
+  pcl::PointIndices::Ptr inliers(new pcl::PointIndices);
+  pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
+  *cloud_filtered = raw_points;
+  segmentation.setOptimizeCoefficients (true);
+  segmentation.setModelType (pcl::SACMODEL_PLANE);
+  segmentation.setMethodType (pcl::SAC_RANSAC);
+  segmentation.setDistanceThreshold (0.2);
+  segmentation.setInputCloud (cloud_filtered);
+  segmentation.segment (*inliers, *coefficients);
+  double a_ = coefficients->values[0], b_ = coefficients->values[1], c_ = coefficients->values[2], d_ = coefficients->values[3];
+//  printf("plane: %f x + %f y + %f z = %f.",a_, b_, c_, d_);
+  //double distance_zero = std::fabs(d_) / sqrt(a_ * a_ + b_ * b_ + c_ * c_);
+  double distance_zero = std::fabs(d_) / c_;
+//  printf("distance to zero:{%f}\n",distance_zero);
+  ground_normal = Eigen::Vector3d(coefficients->values[0],coefficients->values[1],coefficients->values[2]);
+  int si = inliers->indices.size();
+
+  for (int j = 0; j < si ; ++j) {
+    cloud_projected.push_back(cloud_filtered->points[inliers->indices[j]]);
+  }
+  raw_points = cloud_projected;
+  return cloud_projected;
+}
+
 }
