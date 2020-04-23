@@ -21,6 +21,7 @@ list(APPEND dir
         param
         tools
         models/feature
+        calibration/component
   )
 
 foreach(_dir ${dir})

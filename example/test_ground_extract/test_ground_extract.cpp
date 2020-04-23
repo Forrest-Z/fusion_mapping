@@ -9,9 +9,12 @@
 #include "glog/logging.h"
 #include "models/feature/ground_feature.h"
 #include "fusion_mapping/core/global_defination/global_defination.h"
+#include "fusion_mapping/core/calibration/component/lidar_to_vehicle.h"
 
 using namespace FM;
 ros::Publisher ground_pub;
+Eigen::Matrix4d trans = Eigen::Matrix4d::Identity();
+Eigen::Matrix4d global_trans = Eigen::Matrix4d::Identity();
 void Callback(const sensor_msgs::PointCloud2ConstPtr& input_ros) {
   pcl::PointCloud<pcl::PointXYZI> pcl_input, ground_pcl;
   pcl::fromROSMsg(*input_ros, pcl_input);
@@ -19,14 +22,28 @@ void Callback(const sensor_msgs::PointCloud2ConstPtr& input_ros) {
   pcl_input.height = 1;
   pcl_input.width = pcl_input.size();
   ground_feature.groundFeature(pcl_input);
-  Eigen::Vector3d ground_normal = Eigen::Vector3d::Identity();
+  Eigen::Vector3d ground_normal = Eigen::Vector3d::Identity(), pre_ground_normal;
   int si = pcl_input.size();
   for(int i = 0 ; i < si ; ++i) {
     if(pcl_input.points.at(i).intensity == 0) ground_pcl.push_back(pcl_input.at(i));
   }
-  ground_feature.groundWithSAC(ground_pcl, ground_normal);
+  double dis = 100;
+  Eigen::Vector3d std_normal(0 , 0 , 1);
+  pcl::transformPointCloud(ground_pcl, ground_pcl, global_trans);
+  while(dis > 0.0001) {
+    if(dis != 100) pre_ground_normal = ground_normal;
+    else pre_ground_normal = std_normal;
+    ground_feature.groundWithSAC(ground_pcl, ground_normal);
+    LidarToVehicle lidar_to_vehicle;
+    trans.block<3,3>(0,0) = lidar_to_vehicle.calibrationRollPitchWithNormal(ground_normal, std_normal);
+    pcl::transformPointCloud(ground_pcl, ground_pcl, trans);
+    dis = Eigen::Vector3d(pre_ground_normal - ground_normal).norm();
+    global_trans = trans * global_trans;
+    std::cout << "distance between two normal: " << dis << std::endl;
+  }
+  std::cout << "global trans is \n" << global_trans << std::endl;
   pcl_input = ground_pcl;
-  std::cout << "ground_normal:\n" << ground_normal << std::endl;
+  std::cout << "ground_normal:\n" << ground_normal << "\n****************************" << std::endl;
   sensor_msgs::PointCloud2 output_ros;
   pcl::toROSMsg(pcl_input, output_ros);
   output_ros.height = 1;
