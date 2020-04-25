@@ -160,9 +160,9 @@ pcl::PointCloud<PointTypeGround> GroundFeature::groundWithSAC(pcl::PointCloud<Po
   segmentation.segment (*inliers, *coefficients);
   double a_ = coefficients->values[0], b_ = coefficients->values[1], c_ = coefficients->values[2], d_ = coefficients->values[3];
 //  printf("plane: %f x + %f y + %f z = %f.",a_, b_, c_, d_);
-  //double distance_zero = std::fabs(d_) / sqrt(a_ * a_ + b_ * b_ + c_ * c_);
-  double distance_zero = std::fabs(d_) / c_;
-//  printf("distance to zero:{%f}\n",distance_zero);
+  double distance_zero = std::fabs(d_) / sqrt(a_ * a_ + b_ * b_ + c_ * c_);
+//  double distance_zero = std::fabs(d_) / c_;
+  printf("distance to zero:{%f}\n",distance_zero);
   ground_normal = Eigen::Vector3d(coefficients->values[0],coefficients->values[1],coefficients->values[2]);
   int si = inliers->indices.size();
 
