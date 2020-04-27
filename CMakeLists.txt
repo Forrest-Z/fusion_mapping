@@ -81,6 +81,18 @@ catkin_package(
 
 )
 
+add_library(fusion_mapping_okvis
+        include/fusion_mapping/core/okvis
+        )
+target_link_libraries(fusion_mapping_okvis
+        #${OpenCV_LIBS}
+        ${CERES_LIBRARIES}
+        ${Boost_LIBRARIES}
+        ${catkin_LIBRARIES}
+        ${PCL_LIBRARIES}
+        #pthread
+        )
+
 # <构建类型>
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
