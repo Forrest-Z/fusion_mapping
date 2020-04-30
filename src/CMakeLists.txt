@@ -22,6 +22,8 @@ list(APPEND dir
         tools
         models/feature
         calibration/component
+        models/ceres_error/factor
+        models/ceres_error/parameterization
   )
 
 foreach(_dir ${dir})
