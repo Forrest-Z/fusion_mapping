@@ -24,6 +24,7 @@ list(APPEND dir
         calibration/component
         models/ceres_error/factor
         models/ceres_error/parameterization
+        models/ceres_error/local_param
   )
 
 foreach(_dir ${dir})
