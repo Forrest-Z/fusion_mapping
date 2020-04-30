@@ -4,3 +4,4 @@ set(_rpath "\$ORIGIN/${_rel}")
 file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" rpath)
 
 add_subdirectory(test_ground_extract)
+add_subdirectory(test_gl_calibration)
