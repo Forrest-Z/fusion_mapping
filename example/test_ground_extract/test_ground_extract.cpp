@@ -17,7 +17,7 @@ Eigen::Matrix4d trans = Eigen::Matrix4d::Identity();
 Eigen::Matrix4d global_trans = Eigen::Matrix4d::Identity();
 bool roll_pitch_calibrated = false;
 void Callback(const sensor_msgs::PointCloud2ConstPtr& input_ros) {
-  roll_pitch_calibrated = true;
+//  roll_pitch_calibrated = true;
   pcl::PointCloud<pcl::PointXYZI> pcl_input, ground_pcl;
   pcl::fromROSMsg(*input_ros, pcl_input);
   GroundFeature ground_feature;
@@ -40,10 +40,12 @@ void Callback(const sensor_msgs::PointCloud2ConstPtr& input_ros) {
     trans.block<3,3>(0,0) = lidar_to_vehicle.calibrationRollPitchWithNormal(ground_normal, std_normal);
     pcl::transformPointCloud(ground_pcl, ground_pcl, trans);
     dis = Eigen::Vector3d(pre_ground_normal - ground_normal).norm();
-    if(!roll_pitch_calibrated) global_trans = trans * global_trans;
+    global_trans = trans * global_trans;
     std::cout << "distance between two normal: " << dis << std::endl;
   }
   std::cout << "global trans is \n" << global_trans << std::endl;
+  Eigen::Quaterniond global_qua(global_trans.block<3, 3>(0 , 0));
+  std::cout << "global qua is \n" << global_qua.x() << " " <<global_qua.y() << " "<<global_qua.z() << " "<<global_qua.w() << " \n";
   pcl_input = ground_pcl;
   std::cout << "ground_normal:\n" << ground_normal << "\n****************************" << std::endl;
   sensor_msgs::PointCloud2 output_ros;

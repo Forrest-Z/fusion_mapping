@@ -35,6 +35,7 @@ HandEyeFactor::HandEyeFactor(const FM::PoseParameterization &lidar_odom, const F
 
   if(jacobians) {
    if(jacobians[0]) {
+     // TODO: checkout the jacobian ...
      Eigen::Map<Eigen::Matrix<double, 4, 4, Eigen::RowMajor> > jacobian_pose(jacobians[0]);
      jacobian_pose.setZero();
      Eigen::Matrix4d J1 = gnss;
